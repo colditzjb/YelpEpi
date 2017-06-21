@@ -1,0 +1,29 @@
+# Proposal for LIS2678, Assignment 2 (data cleaning)
+
+## Background:
+One overarching goal of this research project is to determine the feasibility of using the online Yelp platform to collect business listings for retailers of Electronic Nicotine Delivery Systems (ENDS; e.g., vape shops) in Pennsylvania. To this end, I utilized the Yelp API to collect data for all metropolitan and micropolitan census regions in Pennsylvania (which includes some surrounding states). Each API call was set to maximum search radius of 25 miles, targeting a central zipcode within each identified census region (some geographic overlap was present). 
+
+Data have been collected from the Yelp API at roughly 1-month intervals from September 2016 through present. Data are currently stored in CSV files. Monthly API calls were repeated using several distinct search terms such as "vape", "vaping", and "ecig" to maximize sensitivity. 
+
+As a result of overlap in search radii and search terms, each monthly data file contains many redundant listings. As the searches were repeated several times, search results are also redundant among the data files. Also, several results are outside of Pennsylvania, so additional data cleaning is needed to limit the scope of results to Pennsylvania ENDS retailers. 
+
+## Approach:
+
+### __Input:__
+* Sequentially import data files and append the date that data were obtained (dates are stored in file names). Convert those date strings to DateTime format.
+* De-duplicate redundant listings within each data file (i.e., controlling for duplicates among search terms and results occurring within intersections of overlapping search radii).
+
+### __Formatting:__
+* Reformat the dates to correspond to regular monthly intervals. This is particularly challenging because multiple time points were sometimes assessed within a single calendar month (i.e., beginning- and end-of-month as opposed to the beginning of each month). 
+* Parse the "display_address" field to identify listings inside or outside of Pennsylvania. 
+
+### __Analysis:__
+* Create a DataFrame to examine frequency of unique listings within and outside of Pennsylvania, overall, as a True/False variable.
+* Create a DataFrame to examine frequency of unique Pennsylvania listings per month. This may be challenging because data collection crossed 2016-2017 years.
+
+### __Preliminary Output:__
+* Export a new CSV file that contains unique listings for Pennsylvania ENDS retailers, from the overall data collection framework.
+* Provide an ".ipynb" file with stepwise progression to this end.
+
+## Impact:
+This analysis has recently been accepted for oral presentation at the 2017 American Public Health Association conference. Processes for data formatting and analysis should be well-documented for reproducibility of utilizing and understanding posibilities/limitations when considering Yelp API data for public health implementation.
